@@ -8,3 +8,5 @@
     </div>
 </div>
 <button class="btn btn-outline-success" onclick="openNoteEditModal({{ json_encode($note) }}, {{ $iteration }})"> Edit </button>
+<button class="btn btn-outline-danger" onclick="deleteNote({{ $note->id }}, {{ $listId }})"> Delete </button>
+

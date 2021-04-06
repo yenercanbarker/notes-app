@@ -12,6 +12,10 @@ class ResponseService
         return Response::json(array('success' => true, 'message' => $successMessage));
     }
 
+    public static function jsonSuccessWithData($successMessage ="", $data = []) {
+        return Response::json(array('success' => true, 'message' => $successMessage, 'data' => $data));
+    }
+
     public static function jsonError($erorMessage = "") {
         return Response::json(array('success' => false, 'message' => $erorMessage));
     }

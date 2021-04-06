@@ -20,7 +20,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/list/{listId}', [\App\Http\Controllers\ListController::class, 'index'])->name('list');
 Route::get('/list/show/{listId}', [\App\Http\Controllers\ListController::class, 'show'])->name('list_show');
 Route::post('/list/edit', [\App\Http\Controllers\ListController::class, 'edit'])->name('edit_list');
+Route::post('/list/create', [\App\Http\Controllers\ListController::class, 'create'])->name('create_list');
+Route::post('/list/delete', [\App\Http\Controllers\ListController::class, 'delete'])->name('delete_list');
 
 Route::get('/note/show/{noteId}/{iterationId}', [\App\Http\Controllers\NoteController::class, 'show'])->name('get_note');
 Route::post('/note/edit', [\App\Http\Controllers\NoteController::class, 'edit'])->name('edit_note');
+Route::post('/note/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->name('delete_note');
 Route::post('/list/{listId}/note/add', [\App\Http\Controllers\NoteController::class, 'create'])->name('add_note');

@@ -69,9 +69,18 @@ class NoteController extends Controller
     /**
      * Deletes the note.
      * @param Request $request
-     * @param int $noteId
+     * @return JsonResponse
+     * @throws ValidationException
      */
-    public function delete(Request $request, $noteId) {
+    public function delete(Request $request) {
+        $validateNote = NoteService::validateDeleteNote($request);
+        if ($validateNote->fails()) {
+            return ResponseService::jsonValidationError($validateNote);
+        }
 
+        if(NoteService::deleteNote($validateNote->validated())){
+            return ResponseService::jsonSuccess('mesaj silindi');
+        }
+        return ResponseService::jsonError('mesaj silinirken hata oluştu');
     }
 }

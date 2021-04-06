@@ -6,6 +6,10 @@ $(document).ready(function () {
     });
 });
 
+function openAddListModal() {
+    $("#addListModal").modal();
+}
+
 function openAddNoteModal() {
     $("#addNoteModal").modal();
 }
@@ -108,6 +112,29 @@ function editNote() {
     });
 }
 
+function addList() {
+    clearValidationErrors();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/list/create",
+        type: "post",
+        data: {
+            'title': $("#listTitle").val()
+        }, success: function (response) {
+            if(response.success) {
+                window.location.href = response.data.url;
+            } else {
+                if (response.errors.title) {
+                    $("#listTitle").addClass('is-invalid');
+                    $("#listTitle").after('<span id="noteTitleSpan" class="invalid-feedback" role="alert"> <strong>' + response.errors.title + '</strong> </span>')
+                }
+            }
+        },
+    });
+}
+
 function editList() {
     clearValidationErrors();
     $.ajax({
@@ -142,7 +169,44 @@ function editList() {
     });
 }
 
+function deleteList(listId) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/list/delete",
+        type: "post",
+        data: {
+            'id': listId
+        }, success: function (response) {
+            if (response.success) {
+                alert("kk");
+            } else {
+                alert("nananana");
+            }
+        },
+    });
+}
 
+function deleteNote(noteId, listId) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/note/delete",
+        type: "post",
+        data: {
+            'listId': listId,
+            'noteId': noteId
+        }, success: function (response) {
+            if (response.success) {
+                alert("kk");
+            } else {
+                alert("nananana");
+            }
+        },
+    });
+}
 function clearValidationErrors() {
     $("#noteTitle").removeClass('is-invalid');
     $("#noteText").removeClass('is-invalid');

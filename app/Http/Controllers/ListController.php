@@ -21,9 +21,19 @@ class ListController extends Controller
      * Creates a list.
      * @param Request $request
      *
+     * @throws ValidationException
      */
     public function create(Request $request) {
-
+        $validateList = ToDoListService::validateList($request);
+        if($validateList->fails()) {
+            return ResponseService::jsonValidationError($validateList);
+        } else {
+            $listId = ToDoListService::createList($validateList->validated());
+            if(null !== $listId) {
+                return ResponseService::jsonSuccessWithData('eklendi', ['url' => route('list', $listId)]);
+            }
+        }
+        return null;
     }
 
     /**
@@ -53,7 +63,7 @@ class ListController extends Controller
      * @throws ValidationException
      */
     public function edit(Request $request) {
-        $validateList = ToDoListService::validateList($request);
+        $validateList = ToDoListService::validateEditList($request);
         if($validateList->fails()) {
             return ResponseService::jsonValidationError($validateList);
         }
@@ -67,9 +77,18 @@ class ListController extends Controller
     /**
      * Deletes the list.
      * @param Request $request
-     * @param int $listId
+     * @return JsonResponse
+     * @throws ValidationException
      */
-    public function delete(Request $request, $listId) {
+    public function delete(Request $request) {
+        $validateList = ToDoListService::validateDeleteList($request);
+        if($validateList->fails()) {
+            return ResponseService::jsonValidationError($validateList);
+        }
 
+        if(ToDoListService::deleteList($validateList->validated())) {
+            return ResponseService::jsonSuccess('liste silindi');
+        }
+        return ResponseService::jsonError('liste düzenlenirken hata oluştu');
     }
 }

@@ -28,6 +28,14 @@ class NoteService
         ]);
     }
 
+    public static function validateDeleteNote(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'noteId' => 'required|int',
+            'listId' => 'required|int'
+        ]);
+    }
+
     public static function createNote($note, $listId)
     {
         $list = ToDoList::find($listId);
@@ -42,6 +50,13 @@ class NoteService
     public static function editNote($note)
     {
         return Note::where('id', $note['id'])->update($note);
+    }
+
+    public static function deleteNote($note)
+    {
+        $list = ToDoList::find($note['listId'])->first();
+        $list->notes()->detach($note['noteId']);
+        return Note::find($note['noteId'])->delete();
     }
 
     public static function getNote($noteId)
