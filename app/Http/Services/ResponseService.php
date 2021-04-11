@@ -27,7 +27,7 @@ class ResponseService
         ));
     }
 
-    public static function noteView($note, $noteIteration) {
-        return view('includes.notes.note')->with(['note' => $note, 'iteration' => $noteIteration]);
+    public static function noteView($note, $noteIteration, $listId) {
+        return view('includes.notes.note')->with(['note' => $note, 'iteration' => $noteIteration, 'listId' => $listId]);
     }
 }

@@ -13,11 +13,15 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index()
     {
+        return view('home');
+    }
+
+    public function to_do_lists() {
         $lists = ToDoList::allLists();
         return view('lists')->with(['toDoList' => $lists]);
     }

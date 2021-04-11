@@ -3,6 +3,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Note;
 use App\Models\ToDoList;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,8 +46,15 @@ class ToDoListService
     }
 
     public static function deleteList($listId) {
-        $list = ToDoList::find($listId)->first();
-        $list->notes()->detach();
+        ToDoListService::deleteNotesBelongsToList(ToDoList::find($listId)->first());
         return ToDoList::destroy($listId);
+    }
+
+    public static function deleteNotesBelongsToList($list) {
+        $notes = $list->notes()->get();
+        foreach ($notes as $note) {
+            Note::destroy($note->id);
+        }
+        $list->notes()->sync([]);
     }
 }

@@ -36,6 +36,14 @@ class NoteService
         ]);
     }
 
+    public static function validateChangeStatusNote(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'id' => 'required|int',
+            'status' => 'required'
+        ]);
+    }
+
     public static function createNote($note, $listId)
     {
         $list = ToDoList::find($listId);
@@ -62,5 +70,10 @@ class NoteService
     public static function getNote($noteId)
     {
         return Note::where('id', $noteId)->first();
+    }
+
+    public static function changeStatusNote($note)
+    {
+        return Note::where('id', $note['id'])->update(['status' => $note['status']]);
     }
 }

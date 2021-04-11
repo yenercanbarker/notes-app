@@ -26,7 +26,7 @@ class ToDoList extends Model
     }
 
     public static function allLists() {
-        return User::find(Auth::id())->to_do_lists()->paginate(1);
+        return User::find(Auth::id())->to_do_lists()->paginate(12);
     }
 
     public static function getList($listId) {

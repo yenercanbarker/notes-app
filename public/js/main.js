@@ -17,8 +17,9 @@ function openAddNoteModal() {
 function openNoteEditModal(note, noteIteration) {
     clearValidationErrors();
     $("#editNoteModal").modal();
-    $("#noteText").val(note.note);
-    $("#noteTitle").val(note.title);
+    $("#noteTextDiv #editNoteText").val(note.note);
+    $("#noteTitleDiv #editNoteTitle").val(note.title);
+    $("#noteListId").val(note.title);
     $("#noteId").val(note.id);
     $("#noteDivId").val(noteIteration);
 }
@@ -80,8 +81,8 @@ function editNote() {
         type: "post",
         data: {
             'id': id,
-            'note': $("#noteText").val(),
-            'title': $("#noteTitle").val()
+            'note': $("#editNoteText").val(),
+            'title': $("#editNoteTitle").val()
         }, success: function (response) {
             if (response.success) {
                 $.ajax({
@@ -91,8 +92,8 @@ function editNote() {
                     url: "/note/show/" + id + "/" + iteration,
                     type: "get",
                     success: function (response) {
-                        $("#note" + $("#noteDivId").val()).empty();
-                        $("#note" + $("#noteDivId").val()).html(
+                        $("#note" + iteration).empty();
+                        $("#note" + iteration).html(
                             response
                         );
                     }
@@ -207,6 +208,61 @@ function deleteNote(noteId, listId) {
         },
     });
 }
+
+function changeNoteStatus(noteId, noteStatus, noteIteration) {
+    var isNoteDone;
+    if(noteStatus === 'NEW') {
+        noteStatus = 'DONE';
+        isNoteDone = 1;
+    } else {
+        noteStatus = 'NEW';
+        isNoteDone = 0;
+    }
+
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/note/change-status",
+        type: "post",
+        data: {
+            'id': noteId,
+            'status': noteStatus,
+        }, success: function (response) {
+            if (response.success) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/note/show/" + noteId + "/" + noteIteration,
+                    type: "get",
+                    success: function (response) {
+                        $("#note" + noteIteration).empty();
+                        $("#note" + noteIteration).html(
+                            response
+                        );
+                    }
+                });
+                console.log("falafella");
+            } else {
+                console.log("tazameta");
+            }
+        },
+    });
+
+    if(isNoteDone === 1) {
+        $("#noteDiv" + noteId).addClass("note-done-div");
+        $("#noteTitle" + noteId).addClass("note-done");
+        $("#noteText" + noteId).addClass("note-done");
+    } else {
+        $("#noteDiv" + noteId).removeClass("note-done-div");
+        $("#noteTitle" + noteId).removeClass("note-done");
+        $("#noteText" + noteId).removeClass("note-done");
+    }
+
+}
+
 function clearValidationErrors() {
     $("#noteTitle").removeClass('is-invalid');
     $("#noteText").removeClass('is-invalid');

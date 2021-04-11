@@ -12,10 +12,10 @@
                 <input type="hidden" id="noteId" value="">
                 <input type="hidden" id="noteListId" value="">
                 <div id="noteTitleDiv">
-                    <input type="text" id="noteTitle"  value="" class="form-control"/>
+                    <input type="text" id="editNoteTitle" value="" class="form-control"/>
                 </div>
                 <div id="noteTextDiv">
-                    <textarea id="noteText" cols="20" rows="10" class="form-control"></textarea>
+                    <textarea id="editNoteText" cols="20" rows="10" class="form-control"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
