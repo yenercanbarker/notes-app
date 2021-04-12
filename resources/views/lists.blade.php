@@ -5,7 +5,7 @@
 
     <div class="container-fluid hero-background"></div>
 
-    <div class="container center-content border">
+    <div class="container center-content lists-div p-0">
         <div class="row justify-content-center">
             <div class="container-fluid">
                 <h4 class="page-header"> your lists. </h4>

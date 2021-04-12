@@ -118,6 +118,19 @@ body {
     margin: 0 auto;
 }
 
+.notes-div {
+    min-height: 50vh;
+}
+
+.notes {
+    max-height: 75vh;
+    overflow-y: scroll;
+}
+
+.lists-div {
+    min-height: 50vh;
+}
+
 .to-do-list-mini {
     display: inline-block;
     color: #928bff;
@@ -252,6 +265,50 @@ label {
 
 .note-done-div {
     background-color: rgba(0, 255, 0, .3);
+}
+
+.note-icons-div {
+    position: absolute;
+    top: 0;
+    left: -37px;
+    background-color: #6c63ff;
+    border-radius: 5px 0 0 5px;
+}
+
+.note-icons {
+    text-align: center;
+    font-size: 26px;
+    color: white;
+}
+
+.note-done-icon {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.note-done-icon:hover {
+    color: green;
+}
+
+.note-edit-icon {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.note-edit-icon:hover {
+    color: #1d68a7;
+}
+
+.note-delete-icon {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.note-delete-icon:hover {
+    color: red;
 }
 
 @media (max-width: 576px) {
