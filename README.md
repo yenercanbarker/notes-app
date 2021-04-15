@@ -1,3 +1,5 @@
+## Matris Notes 
+
 Basic To Do List App which works on the web.
 
 I created this app for use Laravel's pivot tables and pagination.
@@ -12,6 +14,9 @@ Basically I tried to create kind of architecture.
 * JavaScript
 * jQuery
 * MySQL
+
+
+## Installation
 
 * Create database.
 * Create .env file and enter your database configurations.
