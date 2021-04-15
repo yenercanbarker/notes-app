@@ -48,10 +48,17 @@ function addNote() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: "/list/show/" + id,
+                    url: "/list/show/" + $("#listId").val(),
                     type: "get",
                     success: function (response) {
-                        alert("okey");
+                        $("#listDiv").empty();
+                        $("#listDiv").html(
+                            response
+                        );
+                        $("#addNoteModal").modal('hide');
+                        $("#noteText").val("");
+                        $("#noteTitle").val("");
+                        alert("New note added");
                     }
                 });
             } else {
@@ -96,6 +103,10 @@ function editNote() {
                         $("#note" + iteration).html(
                             response
                         );
+                        $("#editNoteModal").modal('hide');
+                        $("#editNoteText").val("");
+                        $("#editNoteTitle").val("");
+                        alert("Note edited added");
                     }
                 });
             } else {
@@ -158,6 +169,10 @@ function editList() {
                     success: function (response) {
                         $("#listDiv").empty();
                         $("#listDiv").html(response);
+
+                        $("#editListModal").modal('hide');
+                        $("#listTitle").val("");
+                        alert("List edited");
                     }
                 });
             } else {
@@ -181,9 +196,9 @@ function deleteList(listId) {
             'id': listId
         }, success: function (response) {
             if (response.success) {
-                alert("kk");
+                window.location.href = "/to-do-lists";
             } else {
-                alert("nananana");
+                alert("Something went wrong");
             }
         },
     });
@@ -201,9 +216,10 @@ function deleteNote(noteId, listId) {
             'noteId': noteId
         }, success: function (response) {
             if (response.success) {
-                alert("kk");
+                $("#noteDiv" + noteId).remove();
+                alert("Note deleted");
             } else {
-                alert("nananana");
+                alert("Something went wrong");
             }
         },
     });
@@ -219,6 +235,17 @@ function changeNoteStatus(noteId, noteStatus, noteIteration) {
         isNoteDone = 0;
     }
 
+    if(isNoteDone === 1) {
+        $("#noteDiv" + noteId).addClass("note-done-div");
+        $("#noteTitle" + noteId).addClass("note-done");
+        $("#noteText" + noteId).addClass("note-done");
+        alert("Well done, great job");
+    } else {
+        $("#noteDiv" + noteId).removeClass("note-done-div");
+        $("#noteTitle" + noteId).removeClass("note-done");
+        $("#noteText" + noteId).removeClass("note-done");
+        alert("You'll do this, there is no doubt");
+    }
 
     $.ajax({
         headers: {
@@ -244,23 +271,9 @@ function changeNoteStatus(noteId, noteStatus, noteIteration) {
                         );
                     }
                 });
-                console.log("falafella");
-            } else {
-                console.log("tazameta");
             }
         },
     });
-
-    if(isNoteDone === 1) {
-        $("#noteDiv" + noteId).addClass("note-done-div");
-        $("#noteTitle" + noteId).addClass("note-done");
-        $("#noteText" + noteId).addClass("note-done");
-    } else {
-        $("#noteDiv" + noteId).removeClass("note-done-div");
-        $("#noteTitle" + noteId).removeClass("note-done");
-        $("#noteText" + noteId).removeClass("note-done");
-    }
-
 }
 
 function clearValidationErrors() {

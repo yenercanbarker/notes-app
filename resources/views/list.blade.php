@@ -7,17 +7,11 @@
 
     <div class="container-fluid hero-background"></div>
 
-    <div class="container center-content notes-div">
+    <div class="container-fluid center-content notes-div">
         <div class="row justify-content-center">
             <div class="container-fluid">
-                <div class="">
-                    <a href="{{ URL::previous() }}">
-                        <button class="btn btn-primary">Go Back</button>
-                    </a>
-                </div>
-
-                <div class="container border">
-                    <div id="listDiv">
+                <div class="container">
+                    <div id="listDiv" class="position-relative">
                         @include('includes.lists.list', ['list' => $list])
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ToDoList;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        if(!Auth::user()) {
+            return view('home');
+        }
+        return $this->to_do_lists();
     }
 
     public function to_do_lists() {

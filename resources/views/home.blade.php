@@ -4,7 +4,7 @@
 
 <div class="container-fluid hero-background"></div>
 
-<div class="container">
+<div class="container center-home-content">
     <div class="row">
         <div class="container col-lg-5 col-md-4 col-12 to-do-list-image-div">
             <div class="to-do-list-image">
@@ -14,14 +14,15 @@
 
         <div class="container col-lg-7 col-md-8 col-12 welcome-div">
             <div class="">
-                <h1 class="welcome-header"> take your notes. </h1>
-                <h3 class="welcome-second-header">
-                    empty your mind, let us for clean your brain <br> from the things.
-                </h3>
-                <p class="welcome-text"> You don't have to think about what do you do.&nbsp Just create your lists, add your notes, empty your mind and do your works.</p>
-                <p class="welcome-footer"> Register and start creating your lists. <br>
-                    <a href="{{ route('register') }}"><button class="btn register-button"> Register </button></a>
-                </p>
+                <h1 class="welcome-header"> {{ __('main.welcome_title') }} </h1>
+                <h3 class="welcome-second-header"> {{ __('main.welcome_second_header') }} </h3>
+                <p class="welcome-text"> {{ __('main.welcome_text') }} </p>
+                <br>
+
+                <div class="flex-row text-center">
+                    <a href="{{ route('login') }}"><button class="btn login-button ml-2 mr-2"> {{ __('main.login') }} </button></a>
+                    <a href="{{ route('register') }}"><button class="btn register-button ml-2 mr-2"> {{ __('main.register') }} </button></a>
+                </div>
             </div>
         </div>
     </div>

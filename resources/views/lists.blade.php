@@ -8,9 +8,9 @@
     <div class="container center-content lists-div p-0">
         <div class="row justify-content-center">
             <div class="container-fluid">
-                <h4 class="page-header"> your lists. </h4>
+                <h4 class="page-header"> {{ __('main.your_lists') }} </h4>
                 <div class="container-fluid mt-4 mb-4 text-center">
-                   <span class="create-button" onclick="openAddListModal()"> create a new one </span>
+                   <span class="create-button" onclick="openAddListModal()"> {{ __('main.create_button') }} </span>
                 </div>
 
                 <div class="row to-do-lists mt-3 mb-3">

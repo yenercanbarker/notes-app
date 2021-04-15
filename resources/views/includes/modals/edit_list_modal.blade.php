@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit List</h5>
+                <h5 class="modal-title">{{ __('main.edit_list') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="editList()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('main.close') }}</button>
+                <button type="button" class="btn btn-primary" onclick="editList()">{{ __('main.edit_list') }}</button>
             </div>
         </div>
     </div>

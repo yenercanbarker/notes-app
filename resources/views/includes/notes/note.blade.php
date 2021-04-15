@@ -1,10 +1,10 @@
-<div class="container">
-    <div id="noteDiv{{ $note->id }}" @if($note->status === 'DONE')  class="note-done-div" @endif class="card mb-3 ml-3" style="position:relative;">
-        <div id="noteTitle{{ $note->id }}" @if($note->status === 'DONE')  class="note-done" @endif class="card-header">
+<div id="noteDiv{{ $note->id }}" class="container">
+    <div class="card mb-3 ml-3 @if($note->status === 'DONE') note-done-div @endif"  style="position:relative;">
+        <div id="noteTitle{{ $note->id }}" class="card-header @if($note->status === 'DONE') note-done @endif">
             <span class="text-break">
-                {{ $note->title }} ASDASJHKDGASJDGASJDGASKJDGASHJDASGHDASDASJHKDGASJDGASJDGASKJDGASHJDASGHDASDASJHKDGASJDGASJDGASKasd
+                {{ $note->title }}
             </span>
-            <span class="d-inline border float-right note-icons-div">
+            <span class="d-inline float-right note-icons-div">
                 <div class="d-flex flex-column pr-1 pl-1 note-icons">
                     <span class="note-done-icon" onclick="changeNoteStatus({{ $note->id }}, '{{ $note->status }}', {{ $iteration }})"><i class="fa fa-check-circle"></i></span>
                     <span class="note-edit-icon" onclick="openNoteEditModal({{ json_encode($note) }}, {{ $iteration }})"><i class="fa fa-edit"></i></span>
