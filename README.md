@@ -6,7 +6,7 @@ I created this app for use Laravel's pivot tables and pagination.
 Also I created this using with Services, Responses and Request.
 Basically I tried to create kind of architecture.
 
-* Laravel / Pivot tables
+* Laravel
 * PHP
 * HTML
 * CSS
